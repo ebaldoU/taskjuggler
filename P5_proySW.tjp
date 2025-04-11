@@ -71,9 +71,8 @@ resource dev3 "Peter Green" {
 
 resource student "Enrique Baldovin Cotela" {
   email "869402@unizar.es"
-  workinghours mon - fri (08:00-12:00)
-  workinghours sat off
-  workinghours sun off
+    workinghours mon - fri 08:00 - 12:00
+  workinghours sat - sun off
 }
 
 
