@@ -70,7 +70,7 @@ resource dev3 "Peter Green" {
 }
 resource student "Enrique Baldovin Cotela" {
   email "869402@unizar.es"
-  maxunits 0.5
+  allocation 0.5
 }
 
 # Now we specify the work packages. The whole project is described as
