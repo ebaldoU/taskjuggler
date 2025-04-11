@@ -71,21 +71,11 @@ resource dev3 "Peter Green" {
 
 resource student "Enrique Baldovin Cotela" {
   email "869402@unizar.es"
-  calendar studentcal
-  availability {
-    monday    08:00-12:00
-    tuesday   08:00-12:00
-    wednesday 08:00-12:00
-    thursday  08:00-12:00
-    friday    08:00-12:00
-  }
-}
-
-calendar studentcal "Student Calendar" {
   workinghours monday - friday (08:00-12:00)
   workinghours saturday off
   workinghours sunday off
 }
+
 
 # Now we specify the work packages. The whole project is described as
 # a task that contains subtasks. These subtasks are then broken down
