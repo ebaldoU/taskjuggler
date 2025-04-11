@@ -19,7 +19,7 @@ project pSix "Web Game"  2024-12-15 +5m {
   # the project reports. If not specified, the current day will be
   # used, but this will likely be outside of the project range, so it
   # can't be seen in the reports.
-  now 2025-02-25-13:00
+  now 2025-04-11-13:00
   # The currency for all money values is the US Dollar.
   currency "EUR"
 
@@ -67,6 +67,10 @@ resource dev2 "Samantha Müller" {
 }
 resource dev3 "Peter Green" {
   email "kkk@unizar.es"
+}
+resource student "Enrique Baldovin Cotela" {
+  email "869402@unizar.es"
+  allocation 0.5
 }
 
 # Now we specify the work packages. The whole project is described as
@@ -146,15 +150,63 @@ task WMGame "Web & Mobile Game" {
       depends WMGame.twebF.tFEc
     }    
   }
+  
+  task tmobile "Mobile Front End" {
+    purge chargeset
+    chargeset mFront
+    responsible dev3
+    depends WMGame.tgdesign  # Dependencia razonable al diseño general
+    
+    task tMUID "Mobile UI Design" {
+      effort 7d
+      allocate dev3
+    }
+    task tMDev "Mobile Development" {
+      effort 12d
+      allocate dev3, student  # Asigna también a ti (nuevo recurso)
+      depends WMGame.tmobile.tMUID
+    }
+    task tMTest "Mobile Testing" {
+      effort 5d
+      allocate dev2
+      depends WMGame.tmobile.tMDev
+    }
+  }
+
+  task tcloud "Cloud Deployment" {
+      purge chargeset
+      chargeset back
+      responsible boss
+      depends WMGame.tback.tbackDev  # Dependencia al completar el back end
+      
+      task tCloudEval "Cloud Provider Evaluation" {
+          effort 3d
+          allocate dev2
+      }
+      task tCloudDeploy "Cloud Deployment Execution" {
+          effort 4d
+          allocate dev1, dev2
+          depends WMGame.tcloud.tCloudEval
+      }
+  }
 
   task ttest "Acceptance tests" {
+      start 2025-05-15
       effort 10d
       allocate boss
       allocate dev2
       actual:effort 20d
       depends WMGame.twebF
       depends WMGame.tback
+      depends WMGame.tmobile    # tarea móvil
+      depends WMGame.tcloud     # nueva tarea en la nube
+      
+      journalentry 2025-04-11 "Planning update" {
+         author student
+         alert green
+         summary "Se ha modificado la planificación el día de hoy."
       }
+  }
 
     
   task deliveries "Milestones" {
@@ -251,6 +303,13 @@ textreport frame "" {
     formats html
     title "Resource Graph"
     center '<[report id="resourceGraph"]>'
+  }
+
+  textreport initialPlan "Initial Plan Overview" {
+      formats html
+      scenarios plan
+      title "Initial Project Plan"
+      center '<[report id="overview"]>'
   }
 }
 
