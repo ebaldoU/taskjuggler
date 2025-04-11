@@ -81,6 +81,12 @@ resource student "Enrique Baldovin Cotela" {
   }
 }
 
+calendar studentcal "Student Calendar" {
+  workinghours monday - friday (08:00-12:00)
+  workinghours saturday off
+  workinghours sunday off
+}
+
 # Now we specify the work packages. The whole project is described as
 # a task that contains subtasks. These subtasks are then broken down
 # into smaller tasks and so on. The innermost tasks describe the real
