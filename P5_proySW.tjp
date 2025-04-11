@@ -291,7 +291,7 @@ textreport frame "" {
 
   textreport development "Development" {
     formats html
-    center '<[report id="development"]>' #
+    center '<[report id="development"]>' 
   }
 
   textreport "ContactList" {
