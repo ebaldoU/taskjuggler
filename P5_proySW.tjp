@@ -70,6 +70,7 @@ resource dev3 "Peter Green" {
 }
 resource student "Enrique Baldovin Cotela" {
   email "869402@unizar.es"
+  maxunits 0.5
 }
 
 # Now we specify the work packages. The whole project is described as
@@ -92,6 +93,11 @@ task WMGame "Web & Mobile Game" {
       effort 2d
       allocate boss
       depends WMGame.deliveries.start
+      journalentry 2025-04-11 "Actualización de práctica" {
+          author student
+          alert yellow
+          summary "Actualización de la planificación para la práctica del 11/04/25."
+      }
   }
 
   task tback "Back End" {
@@ -190,7 +196,7 @@ task WMGame "Web & Mobile Game" {
   }
 
   task ttest "Acceptance tests" {
-      start 2025-04-12
+      start 2025-05-15
       effort 10d
       allocate boss
       allocate dev2
